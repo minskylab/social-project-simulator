@@ -3,7 +3,8 @@ import Head from "next/head";
 import styled from "styled-components";
 
 const Body = styled.div`
-  background-color: "#ff6445";
+  background-color: #ff6445;
+  color: #0f0d16;
 `;
 
 const Home = () => (
