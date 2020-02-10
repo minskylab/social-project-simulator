@@ -1,13 +1,14 @@
 import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
+import { NextPage } from "next";
 
 const Body = styled.div`
-  background-color: #ff6445;
+  background-color: ${props => props.theme.colors.primary};
   color: #0f0d16;
 `;
 
-const Home = () => (
+const Home: NextPage = () => (
   <div>
     <Head>
       <title>Home</title>
