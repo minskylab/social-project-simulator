@@ -2,6 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Project } from "../logic";
 import MinskyInput from "./MinskyInput";
+import Minskybutton from "./MInskyButton";
 
 interface ProjectCardProps {
     project: Project;
@@ -16,6 +17,14 @@ interface NewFeatureState {
 
 const NewFeatureBox = styled.div`
     max-width: 24em;
+    display: flex;
+    flex-flow: column;
+`;
+
+const ProjectRepresentation = styled.div``;
+
+const GlobalWrapper = styled.div`
+    display: flex;
 `;
 
 const ProjectCard: FunctionComponent<ProjectCardProps> = props => {
@@ -26,15 +35,15 @@ const ProjectCard: FunctionComponent<ProjectCardProps> = props => {
     }, [props.project]);
 
     return (
-        <div>
-            <div>
+        <GlobalWrapper>
+            <ProjectRepresentation>
                 <div>Project "{props.project.name}"</div>
                 <ul>
                     {props.project.features.map(f => {
                         return <li>{f.name}</li>;
                     })}
                 </ul>
-            </div>
+            </ProjectRepresentation>
             <NewFeatureBox>
                 <MinskyInput
                     type={"text"}
@@ -61,11 +70,13 @@ const ProjectCard: FunctionComponent<ProjectCardProps> = props => {
                     type="number"
                     value={newFeature.difficult}
                     placeholder={"Feature difficult"}
-                    onChange={(val: string) => setNewFeature({ difficult: Number.parseInt(val) })}
+                    onChange={(val: string) => setNewFeature({ difficult: Number.parseFloat(val) })}
                     label={"Difficult"}
                 />
+                <div style={{ height: "16px" }}></div>
+                <Minskybutton text={"Save Feature"} />
             </NewFeatureBox>
-        </div>
+        </GlobalWrapper>
     );
 };
 
