@@ -2,13 +2,13 @@ import React from "react";
 import { NextPage } from "next";
 import { useState } from "react";
 import ProjectCard from "../components/ProjectCard";
-import {Project} from "../logic";
+import { Project } from "../logic";
+import ProjectTimeline from "../components/ProjectTimeline";
 
 enum SimulatorStep {
     IntroducingDates,
     Simulating
 }
-
 
 const Simulator: NextPage = () => {
     const projectName = "Sentido App";
@@ -21,7 +21,10 @@ const Simulator: NextPage = () => {
         <div>
             <div>{step}</div>
             <div>
-                <ProjectCard project={project}/>
+                <ProjectTimeline project={project} />
+            </div>
+            <div>
+                <ProjectCard project={project} />
             </div>
         </div>
     );

@@ -25,8 +25,8 @@ const Input = styled.input`
 
     :focus {
         outline: none;
-        border: 0.5px solid #1b1b1b;
-        box-shadow: 0 0 0.5px 0.5px #ffc48244;
+        /* border: 0.5px solid #1b1b1b; */
+        /* box-shadow: 0 0 0.5px 0.5px #ffc48244; */
         background-color: #fff6d2;
     }
 
@@ -46,6 +46,7 @@ const InputWrapper = styled.div`
     flex-flow: column;
     font-family: "Karla", sans-serif;
     padding: 4px 0;
+    margin-top: 8px;
 `;
 
 interface LabelProps {

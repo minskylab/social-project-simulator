@@ -6,12 +6,18 @@ interface Feature {
     duration: number;
 }
 
+interface IdeationStage {
+    name: string;
+    duration: number;
+}
+
 interface ProjectDescription {
     startDate: Date;
     endDate: Date;
     duration: number;
 
     features: Feature[];
+    ideationStages: IdeationStage[];
     ideationDuration: number;
     developDuration: number;
     developmentGap: number;
@@ -23,21 +29,16 @@ class Project {
     startDate: Date = new Date(Date.now());
     duration: number = 10;
 
-    definition: number = 5;
-    prioritization: number = 1;
-    flows: number = 4;
-    branding: number = 3;
-    wireframes: number = 5;
-    mockups: number = 4;
-
+    ideationStages: IdeationStage[];
     features: Feature[];
 
     monthCost: number = 600; // USD 600
     developmentGap: number = 30; // 30 days
     difficultOffset: number = 0.5; // 0.5 -> medium
 
-    constructor(name, startDate?: Date, duration?: number) {
+    constructor(name: string, startDate?: Date, duration?: number) {
         this.name = name;
+        this.ideationStages = [];
         this.features = [];
         if (startDate) {
             this.startDate = startDate;
@@ -46,10 +47,21 @@ class Project {
         if (duration) {
             this.duration = duration;
         }
+
+        this.ideationStages.push(
+            { name: "definition", duration: 5 },
+            { name: "prioritization", duration: 1 },
+            { name: "flows", duration: 4 },
+            { name: "branding", duration: 3 },
+            { name: "wireframes", duration: 5 },
+            { name: "mockups", duration: 4 }
+        );
     }
 
     ideationDuration(): number {
-        return this.definition + this.prioritization + this.flows + this.branding + this.wireframes + this.mockups;
+        var totalDuration: number = 0;
+        this.ideationStages.map(stage => (totalDuration += stage.duration));
+        return totalDuration;
     }
 
     addFeature(name: string, costByHour: number, duration: number, difficult: number = this.difficultOffset) {
@@ -62,7 +74,7 @@ class Project {
     }
 
     deleteFeature(name: string) {
-        this.features = this.features.filter(f => f.name != name)
+        this.features = this.features.filter(f => f.name != name);
     }
 
     _featureCost(index: number = 0): number {
@@ -104,10 +116,11 @@ class Project {
             duration: this.duration,
             endDate: endDate,
             ideationDuration: this.ideationDuration(),
+            ideationStages: this.ideationStages,
             startDate: this.startDate,
             totalCost: this.totalCost()
-        }
+        };
     }
 }
 
-export {Project}
+export { Project };
